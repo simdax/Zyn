@@ -1,0 +1,5 @@
+(
+name:"zyn",
+version:"1.0.0",
+summary:"tool to control zynaddsubfx from SC"
+)
