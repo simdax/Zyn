@@ -29,7 +29,7 @@ Zyn{
 	}
 	*panic{
 		if(this.isOpen.not){^nil};
-		NetAddr("localhost", oscPort).sendMsg("/Panic")
+		NetAddr("localhost", NetAddr.langPort).sendMsg("/Panic")
 	}
 	// TODO manage multi instances
 	
