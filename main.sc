@@ -19,17 +19,13 @@ Zyn{
 		if(this.isOpen){"already opened".warn}
 		//else
 		{
-			pid=("zynaddsubfx -P" ++ oscPort ++" -I alsa --auto-connect -l /home/simdax/Musique/zyn.xmz").unixCmd
+			pid=("zynaddsubfx -P" ++ oscPort ++" -I alsa --auto-connect").unixCmd
 			// TODO what's the heck with pid ?
 			+ 2;
 		}
 	}
 	*kill{
 		pid !? {("kill "++pid).unixCmd}
-	}
-	*panic{
-		if(this.isOpen.not){^nil};
-		NetAddr("localhost", NetAddr.langPort).sendMsg("/Panic")
 	}
 	// TODO manage multi instances
 	
@@ -58,5 +54,15 @@ Zyn{
 		{"pas réussi à connecter !".warn};
 		
 	}
+	// OSC interface
+	*panic{
+		if(this.isOpen.not){^nil};
+		NetAddr("localhost", oscPort).sendMsg("/Panic")
+	}
+
+	//TODO
+	// *loadXMZ{
+	// 	NetAddr("localhost", oscPort).sendMsg("/load_xmz", )
+	// }
 	
 }
