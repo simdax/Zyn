@@ -40,7 +40,7 @@ Zyn{
 			this.open;
 		};
 		this.port_(port);
-		r{Zyn.test(port); 1.wait; Zyn.panic}.play
+		this.test;
 	}
 
 	
@@ -55,7 +55,7 @@ Zyn{
 		try{MIDIOut.connect(p, MIDIClient.destinations
 			.detect{|x| x.name==Zyn.nam}
 		);
-			p=port; }
+			port=p; }
 		{"pas réussi à connecter !".warn};
 		
 	}
@@ -65,12 +65,21 @@ Zyn{
 		NetAddr("localhost", oscPort).sendMsg("/Panic")
 	}
 	*test{ arg port=0;
-		MIDIOut(port).noteOn(0, 60, 60)
+		var t={MIDIOut(port).noteOn(0, 60, 60)};
+		r{t.value; 1.wait; Zyn.panic}.play
+
 	}
-	
-	//TODO
+//TODO
 	// *loadXMZ{
 	// 	NetAddr("localhost", oscPort).sendMsg("/load_xmz", )
 	// }
+
+	// GUI
+	*gui{
+		Button().front.action_{
+			Zyn.test(port)
+		} 
+	}
+
 	
 }
