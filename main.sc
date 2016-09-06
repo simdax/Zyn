@@ -5,7 +5,7 @@ Zyn{
 	// TODO check for windows
 	
 	classvar cmdline, <port;
-	classvar <oscPort;
+	classvar <>oscPort;
 	classvar <pid;
 	classvar <nam;
 
@@ -16,10 +16,11 @@ Zyn{
 	*isOpen{
 		^"ps -e | grep zynaddsubfx".unixCmdGetStdOut.notEmpty;
 	}
-	*open{ arg oscPort=9000;
-		if(this.isOpen){"already opened".warn}
+	*open{ arg oscP=9000;
+		if(this.isOpen){("already opened with port "++oscPort).warn}
 		//else
 		{
+			oscPort=oscP;
 			pid=("zynaddsubfx -P" ++ oscPort ++" -I alsa --auto-connect").unixCmd
 			// TODO what's the heck with pid ?
 			+ 2;
@@ -52,9 +53,10 @@ Zyn{
 			{true}, {
 			 MIDIClient.init; 
 		});
-		try{MIDIOut.connect(p, MIDIClient.destinations
-			.detect{|x| x.name==Zyn.nam}
-		);
+		try{
+			MIDIOut.connect(p,
+				MIDIClient.destinations.detect{|x| x.name==Zyn.nam}
+			);
 			port=p; }
 		{"pas réussi à connecter !".warn};
 		
@@ -62,18 +64,21 @@ Zyn{
 	// OSC interface
 	*panic{
 		if(this.isOpen.not){^nil};
-		NetAddr("localhost", oscPort).sendMsg("/Panic")
+		this.send("/Panic")
 	}
-	*test{ arg port=0;
+	*test{ 
 		var t={MIDIOut(port).noteOn(0, 60, 60)};
 		r{t.value; 1.wait; Zyn.panic}.play
 
 	}
-//TODO
+	*send{ arg ... msg;
+		NetAddr("localhost", oscPort).sendMsg(*msg)
+	}
+	//TODO
 	// *loadXMZ{
 	// 	NetAddr("localhost", oscPort).sendMsg("/load_xmz", )
 	// }
-
+ 
 	// GUI
 	*gui{
 		Button().front.action_{
