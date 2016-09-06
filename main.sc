@@ -11,6 +11,7 @@ Zyn{
 
 	*initClass{
 		nam="ZynAddSubFX";
+		oscPort=9000
 	}
 	*isOpen{
 		^"ps -e | grep zynaddsubfx".unixCmdGetStdOut.notEmpty;
@@ -32,19 +33,23 @@ Zyn{
 	*isConnected{
 		// TODO hacking with jack_lsp
 	}
-	*new{ arg port;
+	*new{ arg port=0;
 		// TODO: bug etrange avec midiclient.init
 		// DO NOT USE
 		if (this.isOpen.not){
 			this.open;
 		};
 		this.port_(port);
+		r{Zyn.test(port); 1.wait; Zyn.panic}.play
 	}
 
 	
 	// TODO manage multi instance
 	*port_{ arg p;
-		if(MIDIClient.destinations.select({|x| x.name==this.nam}).isEmpty.postln, {
+		if(
+			try{MIDIClient.destinations
+				.select({|x| x.name==this.nam}).isEmpty.postln}
+			{true}, {
 			 MIDIClient.init; 
 		});
 		try{MIDIOut.connect(p, MIDIClient.destinations
@@ -59,7 +64,10 @@ Zyn{
 		if(this.isOpen.not){^nil};
 		NetAddr("localhost", oscPort).sendMsg("/Panic")
 	}
-
+	*test{ arg port=0;
+		MIDIOut(port).noteOn(0, 60, 60)
+	}
+	
 	//TODO
 	// *loadXMZ{
 	// 	NetAddr("localhost", oscPort).sendMsg("/load_xmz", )
