@@ -37,11 +37,14 @@ Zyn{
 	*new{ arg port=0;
 		// TODO: bug etrange avec midiclient.init
 		// DO NOT USE
-		if (this.isOpen.not){
-			this.open;
-		};
-		this.port_(port);
-		this.test;
+		r{
+			if (this.isOpen.not){
+				this.open;
+				2.wait;
+			};
+			this.port_(port);
+			this.test;
+		}.play
 	}
 
 	
