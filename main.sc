@@ -11,7 +11,14 @@ Zyn{
 
 	*initClass{
 		nam="ZynAddSubFX";
-		oscPort=9000
+
+		oscPort=9000;
+		(..16).do{ arg i;
+		OSCdef.newMatching(\zyn++i, { arg reponse;
+			"part "++i++" allumée ? => ".post; reponse[1].postln;
+		}, ("/part"++i++"/Penabled"))
+		}
+		
 	}
 	*isOpen{
 		^"ps -e | grep zynaddsubfx".unixCmdGetStdOut.notEmpty;
@@ -44,6 +51,8 @@ Zyn{
 			};
 			this.port_(port);
 			this.test;
+			2.wait;
+			//wait for test to finish
 		}.play
 	}
 
