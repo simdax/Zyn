@@ -10,6 +10,7 @@ Zyn{
 	classvar <nam;
 
 	*initClass{
+	        Class.initClassTree(OSCdef);
 		nam="ZynAddSubFX";
 
 		oscPort=9000;
