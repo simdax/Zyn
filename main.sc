@@ -72,7 +72,7 @@ Zyn{
 		});
 		try{
 			MIDIOut.connect(p,
-				MIDIClient.destinations.detect{|x| x.name==Zyn.nam}
+				MIDIClient.destinations.detectIndex{|x| x.name==Zyn.nam}
 			);
 			port=p; }
 		{"pas réussi à connecter !".warn};
@@ -86,7 +86,6 @@ Zyn{
 	*test{
 		var t={MIDIOut(port).noteOn(0, 60, 60)};
 		r{t.value; 1.wait; Zyn.panic}.play
-
 	}
 	*send{ arg ... msg;
 		NetAddr("localhost", oscPort).sendMsg(*msg)
