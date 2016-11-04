@@ -1,0 +1,1 @@
+QuarkEditorView("".resolveRelative)

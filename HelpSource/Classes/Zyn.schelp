@@ -1,0 +1,102 @@
+TITLE:: Zyn
+summary:: (put short description here)
+categories:: Undocumented classes
+related:: Classes/SomeRelatedClass, Reference/SomeRelatedStuff, etc.
+
+DESCRIPTION::
+(put long description here)
+
+
+CLASSMETHODS::
+
+METHOD:: panic
+(describe method here)
+
+returns:: (describe returnvalue here)
+
+METHOD:: test
+(describe method here)
+
+returns:: (describe returnvalue here)
+
+METHOD:: send
+(describe method here)
+
+ARGUMENT::  ... msg
+(describe argument here)
+
+returns:: (describe returnvalue here)
+
+METHOD:: initClass
+(describe method here)
+
+returns:: (describe returnvalue here)
+
+METHOD:: kill
+(describe method here)
+
+returns:: (describe returnvalue here)
+
+METHOD:: oscPort
+(describe method here)
+
+returns:: (describe returnvalue here)
+
+METHOD:: pid
+(describe method here)
+
+returns:: (describe returnvalue here)
+
+METHOD:: new
+(describe method here)
+
+ARGUMENT:: port
+(describe argument here)
+
+returns:: (describe returnvalue here)
+
+METHOD:: port
+(describe method here)
+
+ARGUMENT:: p
+(describe argument here)
+
+returns:: (describe returnvalue here)
+
+METHOD:: isConnected
+(describe method here)
+
+returns:: (describe returnvalue here)
+
+METHOD:: open
+(describe method here)
+
+ARGUMENT:: oscP
+(describe argument here)
+
+returns:: (describe returnvalue here)
+
+METHOD:: gui
+(describe method here)
+
+returns:: (describe returnvalue here)
+
+METHOD:: isOpen
+(describe method here)
+
+returns:: (describe returnvalue here)
+
+METHOD:: nam
+(describe method here)
+
+returns:: (describe returnvalue here)
+
+
+INSTANCEMETHODS::
+
+
+EXAMPLES::
+
+code::
+(some example code)
+::
